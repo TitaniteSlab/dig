@@ -1,0 +1,258 @@
+@font-face {
+	font-family: joystixMonospace;
+	src: url('../fonts/joystix_monospace.otf');
+}
+
+/*  http://www.1001freefonts.com/roses_are_ff0000.font  */
+@font-face {
+	font-family: pixel1;
+	src: url('../fonts/RosesareFF0000.ttf');
+}
+/*  http://www.fontspace.com/codeman38/press-start  */
+@font-face {
+	font-family: pressStartK;
+	src: url('../fonts/prstartk.ttf');
+}
+/* this font file appears to be broken... */
+@font-face {
+	font-family: tempesta;
+	src: url('../fonts/pf_tempesta_five.ttf');
+}
+/* http://www.dafont.com/metroid-prime-hunte.font?l[]=10&l[]=1 */
+@font-face {
+	font-family: metroid;
+	src: url('../fonts/Metroid Prime Hunters.ttf');
+	font-weight: 400;
+}
+
+
+html,body {
+	background-color: #050505;
+	color: #111;
+	font-family: metroid, courier;
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	
+	cursor: url('../media/cursor1.png'), auto;
+	
+	-webkit-user-select: none;
+	-webkit-font-smoothing: none;
+	font-smooth: never;
+}
+button, textarea, input {
+	outline: none;
+	cursor: url('../media/cursor1.png'), auto;
+}
+button {
+	font-family: metroid, courier;
+	font-size: 12px;
+	-webkit-font-smoothing: none;
+}
+*:focus {
+	outline: 0;
+}
+
+
+
+.hidden {
+	display: none;
+}
+
+.fullScreen {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.pxBorder {
+	background-color: #F6F6F6;
+	/*background: linear-gradient(135deg, #ffffff 0%,#f0f0f0 100%);*/ /* W3C */
+	
+	border: 10px solid transparent;
+	border-image: url('../media/border1.png');
+	border-image-slice: 10;
+	border-image-width: 1 1 1 1;
+	border-image-outset: 0;
+	border-image-repeat: stretch;
+	border-radius: 14px 14px;
+	padding: 2px 2px;
+}
+
+.pxBorder2 {
+	background-color: #F6F6F6;
+	/*background: linear-gradient(135deg, #ffffff 0%,#f0f0f0 100%);*/ /* W3C */
+	
+	border: 8px solid transparent;
+	border-image: url('../media/border2.png');
+	border-image-slice: 8;
+	border-image-width: 1 1 1 1;
+	border-image-outset: 0;
+	border-image-repeat: stretch;
+	border-radius: 16px 16px;
+	padding: 2px 2px;
+}
+
+.pxBorder3 {
+	background-color: #F6F6F6;
+	/*background: linear-gradient(135deg, #ffffff 0%,#f0f0f0 100%);*/ /* W3C */
+	
+	border: 4px solid transparent;
+	border-image: url('../media/border3.png');
+	border-image-slice: 4;
+	border-image-width: 1 1 1 1;
+	border-image-outset: 0;
+	border-image-repeat: stretch;
+	border-radius: 6px 6px;
+	padding: 0px 0px;
+}
+
+.pxButton {
+	background-color: #F6F6F6;
+	background: linear-gradient(135deg, #ffffff 0%,#f0f0f0 100%); /* W3C */
+	
+	border: 8px solid transparent;
+	border-image: url('../media/pxBorderButton.png');
+	border-image-slice: 8;
+	border-image-width: 1 1 1 1;
+	border-image-outset: 0;
+	border-image-repeat: stretch;
+	border-radius: 10px 10px;
+	
+	min-width: 20px;
+}
+
+.pxInset {
+	background-color: #F6F6F6;
+	border: 2px solid #272727;
+	padding: 6px 6px;
+	border-radius: 2px;
+}
+.pxInset.dark {
+	background-color: #7d7d7d;
+}
+
+.slidePanel {
+	position: absolute;
+}
+.slidePanel.left {
+	left: 0px;
+}
+
+
+.dialog {
+	opacity: 0.97;
+	padding: 2px 2px;
+	box-sizing: border-box;
+}
+.dialog .dialogHeader {
+	position: absolute;
+	top: -28px;
+	left: calc(50% - 110px / 2);
+	width: 110px;
+	height: 44px;
+	text-align: center;
+	padding: 0px 0px;
+	box-sizing: border-box;
+}
+.dialog button.closeDialog {
+	position: absolute;
+	top: -20px;
+	right: -20px;
+	width: 30px;
+	height: 30px;
+	background-image: url('../media/hud/close2.png');
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	/*border: 2px solid #272727;
+	background-color: #F6F6F6;*/
+}
+/*.dialog button.closeDialog:hover {
+	background-color: #DDD;
+}*/
+.dialog button.closeDialog:active {
+	top: -19px;
+}
+.dialog .dialogBody {
+	position: absolute;
+	top: 18px;
+	left: -4px;
+	right: -4px;
+	bottom: -2px;
+	padding: 4px 4px;
+	/*background-image: url('../media/hud/dialog_background1.png');*/
+	background: #F6F6F6;
+}
+.dialog .dialogFooter {
+	position: absolute;
+	bottom: 4px;
+	left: -4px;
+	right: -4px;
+	height: 36px;
+	text-align: center;
+}
+
+.radioSet {
+	
+}
+.radioSet button {
+	margin: 0px 0px;
+	width: 100px;
+	padding: 4px 3px;
+	background-color: #EEE;
+	border: 2px solid #CCC;
+	font-size: 12pt;
+}
+.radioSet button.selected {
+	background-color: #F6F6F6;
+	border: 0px;
+}
+
+
+.pxScroll::-webkit-scrollbar-track {
+	background-color: #333;
+	border-left: 2px solid #333;
+}
+
+.pxScroll::-webkit-scrollbar {
+	background-color: #7d7d7d;
+	width: 12px;
+}
+
+.pxScroll::-webkit-scrollbar-thumb {
+	background-color: #7d7d7d;
+	border-left: 2px solid #333;
+}
+
+
+/* Properties Table */
+.propTable {
+	width: 100%;
+	border-spacing: 0px;
+	margin: 10px 0px;
+	padding: 0px 8px;
+	box-sizing: border-box;
+}
+.propTable .propLabel {
+	font-size: 12pt;
+}
+.propTable .propValue {
+	text-align: right;
+	font-size: 14pt;
+}
+
+
+.taTooltip {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	font-size: 11pt;
+	padding: 4px 4px;
+}

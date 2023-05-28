@@ -1,0 +1,26 @@
+.taSegmentBar {
+	text-align: center;
+	min-height: 16px;
+	min-width: 100px;
+	border: 0px solid #333;
+	box-sizing: border-box;
+	padding: 0px 0px;
+	border-radius: 2px;
+	/*background: linear-gradient(135deg, #ffffff 0%, #eaeaea 100%); /* W3C */
+}
+
+.taSegments {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	bottom: 0px;
+	display: block;
+	height: 100%;
+	overflow: hidden;
+}
+
+.taSegment {
+	min-height: 12px;
+	display: inline-block;
+	background-color: #00f;
+}

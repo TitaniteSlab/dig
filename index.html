@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<base href=""/>
+	
+	<title>Stellar Anomaly</title>
+	
+	<link rel="stylesheet" type="text/css" href="stylesheets/ui-common.css"/>
+	<link rel="stylesheet" type="text/css" href="stylesheets/terra-progressbar.css"/>
+	<link rel="stylesheet" type="text/css" href="stylesheets/terra-segmentbar.css"/>
+	<link rel="stylesheet" type="text/css" href="stylesheets/weapon-display.css"/>
+	<link rel="stylesheet" type="text/css" href="stylesheets/armory.css"/>
+	<link rel="stylesheet" type="text/css" href="stylesheets/inventory.css"/>
+	
+	<style type="text/css">
+	
+		#canvas {
+			
+		}
+		#fpsContainer {
+			position: absolute;
+			top: 2px;
+			left: 2px;
+			font-size: 12pt;
+			color: #EE2222;
+			background-color: #333;
+			opacity: 0.5;
+			padding: 2px 2px;
+		}
+		
+		.mainMenuTitle {
+			position: absolute;
+			left: 20px;
+			top: 40px;
+			font-size: 24pt;
+			color: #111;
+			margin: 40px 0px;
+			background-color: #EEE;
+			border: 2px solid #666;
+			padding: 8px 6px 6px 8px;
+		}
+		
+		#mainMenuContainer {
+			height: 100%;
+		}
+		#mainMenuItems {
+			position: absolute;
+			left: 30px;
+			top: 260px;
+			z-index: 100;
+			width: 260px;
+			margin: 0px 0px;
+			padding: 0px 0px;
+		}
+		.mainMenuItem {
+			display: block;
+			font-size: 15pt;
+			color: #111;
+			/*background-image: url('media/menuitem1.png');*/
+			background: #DDD;
+			/*border: 0px solid #666;*/
+			/*border-left: 12px solid #777;*/
+			width: 240px;
+			box-sizing: border-box;
+			padding: 7px 4px 5px 5px;
+			margin: 10px auto;
+			text-align: left;
+		}
+		.mainMenuItem:hover {
+			background-color: #FFF;
+			
+			/*font-weight: bold;*/
+			/*position: relative;
+			top: 1px;*/
+			/*box-shadow: 0px 0px 10px 2px rgba(255,255,255,0.49);*/
+			/*text-shadow: 0px 0px 12px #FFF;*/
+		}
+		.mainMenuStripe {
+			position: absolute;
+			left: 30px;
+			top: 0px;
+			bottom: 0px;
+			width: 260px;
+			background-color: rgba(255,255,255,0.1);
+		}
+		
+		/*
+		#hotbar {
+			position: absolute;
+			top: 0px;
+			left: calc(50% - 276px / 2);
+			width: 276px;
+			height: 36px;
+			background-image: url('media/hud/hotbar.png');
+		}
+		*/
+		
+		.healthBarWrapper {
+			position: absolute;
+			top: 52px;
+			width: 220px;
+			height: 40px;
+			left: calc(50% - 220px / 2);
+			background-image: url('media/hud/healthbar-wrapper.png');
+		}
+		#healthBar {
+			position: absolute;
+			top: 2px;
+			width: 188px;
+			height: 18px;
+			left: calc(50% - 188px / 2);
+		}
+		#shieldBar {
+			position: absolute;
+			top: 28px;
+			width: 188px;
+			height: 18px;
+			left: calc(50% - 188px / 2);
+		}
+		
+		#escapeMenu {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			bottom: 0px;
+			left: 0px;
+			
+			/*height: 100%;*/
+			
+			background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(30,30,30,0.9) 100%); /* W3C */
+			
+			z-index: 2000;
+		}
+		.escapeMenuStripe {
+			position: absolute;
+			right: 30px;
+			top: 0px;
+			bottom: 0px;
+			width: 260px;
+			background-color: rgba(255,255,255,0.1);
+		}
+		.escapeMenuItems {
+			position: absolute;
+			right: 30px;
+			top: 200px;
+			width: 260px;
+			margin: 0px 0px;
+			padding: 0px 0px;
+			z-index: 2001;
+		}
+		.escapeMenuItem {
+			display: block;
+			font-size: 11pt;
+			color: #111;
+			/*background-image: url('media/menuitem1.png');*/
+			background: #DDD;
+			/*border: 0px solid #666;*/
+			/*border-left: 12px solid #777;*/
+			width: 220px;
+			box-sizing: border-box;
+			padding: 2px 2px;
+			margin: 8px auto;
+			text-align: left;
+		}
+		.escapeMenuItem:hover {
+			background-color: #FFF;
+			
+			/*font-weight: bold;*/
+			/*position: relative;
+			top: 1px;*/
+			/*box-shadow: 0px 0px 10px 2px rgba(255,255,255,0.49);*/
+			/*text-shadow: 0px 0px 12px #FFF;*/
+		}
+		
+		/* Resource Display */
+		#resourceDisplay {
+			position: absolute;
+			top: 8px;
+			right: -8px;
+			width: 110px;
+			height: 40px;
+			
+			font-size: 12pt;
+		}
+		#resourceDisplay > div {
+			padding: 2px 1px
+		}
+		#resourceDisplay img {
+			display: inline-block;
+		}
+		#resourceDisplay .resourceCount {
+			display: inline-block;
+			position: relative;
+			bottom: 3px;
+			padding: 2px 0px 0px 8px;
+		}
+		
+		
+		#planetInfo {
+			position: absolute;
+			width: 200px;
+			height: 270px;
+			opacity: 0.85;
+		}
+		
+	</style>
+	
+	<script type="text/javascript" src="lib/impact/impact.js"></script>
+	<script type="text/javascript" src="lib/game/main.js"></script>
+	
+	<script type="text/javascript">
+		
+		var NODEJS = typeof global !== 'undefined';
+		
+		function onload() {
+		
+			ig.module('index')		// Unloadable; Just writing a bunch of UI code in here until I decide how to refactor each piece.
+			.requires(
+				'impact.impact',
+				'game.main',
+				'game.ui.solar-system',
+				'jquery',
+				'terra'
+			)
+			.defines(function() {
+				
+				// Elements
+				var canvas = $('#canvas');
+				var $w = $(window);
+				var mainMenu = $('#mainMenuContainer');
+				
+				// Menu elements
+				var newGameButton = $('#newGame');
+				var quitGameButton = $('#quitGame');
+				//var saveAndQuitButton = $('#saveAndQuitGame');
+				
+				// Node-Webkit specific stuff
+				if (NODEJS) {
+					var nwGui = require('nw.gui');
+					window.nwindow = nwGui.Window.get();
+					
+					quitGameButton.click(function() {
+						nwGui.App.quit();
+					});
+					quitGameButton.show();
+				}
+				
+				//saveAndQuitButton.click(loadMainMenu);
+				
+				// Basic menu logic
+				newGameButton.click(newGame);
+				
+				$('#fullScreen').click(function() {
+					if (NODEJS) {
+						nwindow.toggleFullscreen();
+					} else {
+						if (document.webkitIsFullscreen) {
+							document.webkitExitFullscreen();
+						} else {
+							document.documentElement.webkitRequestFullscreen();
+						}
+					}
+				});
+				
+				/* Page functions below */
+				function newGame() {
+					canvas.show();
+					mainMenu.hide();
+					
+					if (titleSolarSystem) {
+						titleSolarSystem.destroy();
+						titleSolarSystem = undefined;
+					}
+					
+					//var loadLevelTimer = window.setInterval(function() {
+						if (ig.game) {
+							console.log('loading level');
+							ig.game.loadLevel('Terran');
+							//window.clearInterval(loadLevelTimer);
+						}
+					//}, 100)
+				}
+				
+				/*var */titleSolarSystem = null;
+				function loadMainMenu() {
+					
+					if (ig.game) {
+						ig.game.destroyLevel();
+					}
+					
+					canvas.hide();
+					mainMenu.show();
+						
+					// Title SolarSystem
+					titleSolarSystem = new SolarSystem('#titleSolarSystem', {
+						width: $w.width(),
+						height: $w.height()
+					});
+					
+				}
+				
+				
+				// window resize, update canvases
+				var resizing = false;
+				$w.resize(terra.debounce(function() {
+					if (ig.system) {
+						ig.system.resize($w.width()/2, $w.height()/2);
+					} else if (titleSolarSystem) {
+						titleSolarSystem.setResolution($w.width(), $w.height());
+					}
+				}));
+				
+				// Impact/Game load callback
+				var gameLoaded = function() {
+					// Game quit callback
+					ig.game.quitCallback = function() {
+						loadMainMenu();
+					};
+				};
+				
+				// Initialize Impact
+				//ig.main('#canvas', game.Main, 20, 400*8, 300*8, 1/2);
+				ig.main('#canvas', GameMain, 40, $w.width()/2, $w.height()/2, 2, undefined, gameLoaded);
+				//ig.main('#canvas', game.Main, 40, 1920/2, 1080/2, 2);
+				
+				loadMainMenu();
+			});
+		}
+		
+	</script>
+	
+</head>
+<body onload="onload();">
+	
+	
+	<!-- Main Game Canvas -->
+	<canvas id="canvas" class="fullScreen" style="display: none;"></canvas>
+	
+	
+	
+	
+	<!-- Title SolarSystem -->
+	<canvas id="titleSolarSystem" class="fullScreen"></canvas>
+	
+	<!-- Planet Info Dialog -->
+	<div id="planetInfo" class="pxBorder dialog" style="display: none;">
+		<div class="planetName dialogHeader pxBorder"></div>
+		
+		<div class="dialogBody">
+			
+		</div>
+		
+		<div class="dialogFooter">
+			<button class="goToPlanet pxButton">Go</button>
+		</div>
+	</div>
+	
+	
+	<!-- Main Menu -->
+	<div id="mainMenuContainer">
+		<div class="mainMenuStripe"></div>
+		<div class="mainMenuTitle">STELLAR ANOMALY</div>
+		<div id="mainMenuItems">
+			<button id="loadGame" class="mainMenuItem pxBorder">LOAD GAME</button>
+			<button id="newGame" class="mainMenuItem pxBorder">NEW GAME</button>
+			<button id="mainMenuOptions" class="mainMenuItem pxBorder">OPTIONS</button>
+			<button id="quitGame" class="mainMenuItem pxBorder" style="display: none;">QUIT</button>
+		</div>
+	</div>
+	
+	
+	
+	
+	<!-- Item Hotbar -->
+	<div id="hotbar" style="display: none;"></div>
+	
+	<!-- Health Bar -->
+	<div class="healthBarWrapper" style="display: none;">
+		<div id="healthBar" class="taProgressBar">
+			<div class="taProgressBarCenter" style="width: 100%;"></div>
+			<div class="taProgressBarText">100</div>
+		</div>
+		<div id="shieldBar" class="taSegmentBar">
+			<div class="taSegments" style="width: 100%;"></div>
+		</div>
+	</div>
+		
+	<!-- Weapon Displays -->
+	<div id="weapon1Display" class="weaponDisplay weapon1" data-mount="top" style="display: none;">
+		<div class="weaponInfo pxBorder">
+			<div class="weaponImgWrapper">
+				<canvas class="weaponImg"></canvas>
+			</div>
+			<span class="weaponText">Weapon 1</span>
+		</div>
+		<div class="weaponAmmo pxBorder2"></div>
+	</div>
+	<div id="weapon2Display" class="weaponDisplay weapon2" data-mount="bottom" style="display: none;">
+		<div class="weaponInfo pxBorder">
+			<div class="weaponImgWrapper">
+				<canvas class="weaponImg"></canvas>
+			</div>
+			<span class="weaponText">Weapon 2</span>
+		</div>
+		<div class="weaponAmmo pxBorder2"></div>
+	</div>
+	
+	<!-- Weapon Switcher -->
+	<div id="weaponChooser" class="weaponChooser pxBorder" style="display: none;">
+		
+	</div>
+	
+	<!-- Weapon Upgrades -->
+	<div id="weaponUpgrades" class="slidePanel pxBorder left" style="display: none;">
+		
+	</div>
+	
+	<!-- Armory / Store -->
+	<div id="armory" class="pxBorder dialog" style="display: none;">
+		<div class="dialogHeader pxBorder">Armory</div>
+		<button class="closeDialog pxBorder2"></button>
+		
+		<div class="dialogBody">
+			<div class="armoryRadioSet radioSet">
+				<button data-id="buy" class="selected">Buy</button><button data-id="sell">Sell</button>
+			</div>
+			<div class="itemList pxScroll pxInset dark">
+			
+			</div><div class="itemInfo pxInset">
+				<div class="itemImgWrapper pxBorder2">
+					<canvas class="itemImg" width="0" height="0"></canvas>
+				</div>
+				<div class="itemName"></div>
+				<div class="itemDesc"></div>
+				<table class="propTable">
+					<tbody class="itemProperties"></tbody>
+				</table>
+				<div class="itemButtons">
+					<button class="pxButton buy">Buy</button>
+					<button class="pxButton sell">Sell</button>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div id="inventory" class="slidePanel top pxBorder" style="display: none;">
+		<div id="hotbar">
+<!--<div class="hotbarSlot pxBorder3" data-slot="0"><span class="hotbarSlotNum">1</span></div><div class="hotbarSlot pxBorder3" data-slot="1"><span class="hotbarSlotNum">2</span></div><div class="hotbarSlot pxBorder3" data-slot="2"><span class="hotbarSlotNum">3</span></div><div class="hotbarSlot pxBorder3" data-slot="3"><span class="hotbarSlotNum">4</span></div><div class="hotbarSlot pxBorder3" data-slot="4"><span class="hotbarSlotNum">5</span></div><div class="hotbarSlot pxBorder3" data-slot="5"><span class="hotbarSlotNum">6</span></div><div class="hotbarSlot pxBorder3" data-slot="6"><span class="hotbarSlotNum">7</span></div><div class="hotbarSlot pxBorder3" data-slot="7"><span class="hotbarSlotNum">8</span></div><div class="hotbarSlot pxBorder3" data-slot="8"><span class="hotbarSlotNum">9</span></div><div class="hotbarSlot pxBorder3" data-slot="9"><span class="hotbarSlotNum">0</span></div>-->
+		</div>
+		<div class="inventoryItems pxInset dark">
+			
+		</div>
+	</div>
+	
+	<!-- Star Map -->
+	<div id="solarSystem" class="pxBorder" style="display: none;">
+		<canvas class=""></canvas>
+	</div>
+	
+	<!-- Resource Display -->
+	<div id="resourceDisplay" class="pxBorder" style="display: none;">
+		<div>
+			<img src="media/hud/resource-scrap.png"/><span class="resourceCount scrap">0</span><br/>
+		</div>
+		<div>
+			<img src="media/hud/resource-ore.png"/><span class="resourceCount ore">0</span>
+		</div>
+	</div>
+	
+	<!-- Escape Menu -->
+	<div id="escapeMenu" style="display: none;">
+		<div class="escapeMenuStripe"></div>
+		<div class="escapeMenuItems">
+			<button id="closeEscapeMenu" class="escapeMenuItem pxButton">RESUME</button>
+			<button id="escapeOptions" class="escapeMenuItem pxButton">OPTIONS</button>
+			<button id="saveAndQuitGame" class="escapeMenuItem pxButton">SAVE &amp; QUIT</button>
+			<button id="fullScreen" class="escapeMenuItem pxButton">FULLSCREEN</button>
+		</div>
+	</div>
+	
+	<!-- FPS -->
+	<div id="fpsContainer">
+		<div id="fps"></div>
+		<div id="fps2"></div>
+	</div>
+	
+	
+	<!-- DOM templates -->
+	<div class="domTemplates" style="display: none;">
+	
+		<div data-template="armoryListItem" class="listItem" style="display: none;">
+			<div class="listItemImgWrapper pxBorder3"><div class="listItemImg"></div></div>
+			<div class="listItemInfo">
+				<div class="itemName">Item Name</div>
+				<div class="itemCost">23</div>
+			</div>
+		</div>
+		
+		<table style="display: none;"><tbody>
+			<tr data-template="propTableRow">
+				<td class="propLabel"></td>
+				<td class="propValue"></td>
+			</tr>
+		</tbody></table>
+		
+		<div data-template="weaponChooserItem" class="weaponChooserItem">
+			<canvas class="weaponImg"></canvas>
+			<div class="weaponName"></div>
+		</div>
+		
+		<div data-template="inventoryItem" class="inventoryItem pxBorder3">
+			<span class="hotbarSlotNum"></span>
+			<span class="itemCount"></span>
+		</div>
+		
+		<div data-template="itemTooltip">
+			<div class="itemImg"></div>
+			<div class="itemName"></div>
+			<div class="itemDesc"></div>
+		</div>
+		
+		<div data-template="textTooltip">
+			
+		</div>
+		
+	</div>
+		
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+	"name": "Stellar Anomaly",
+	"main": "index.html",
+	"window": {
+		"width": 1920,
+		"height": 1080,
+		"toolbar": false,
+		"frame": true,
+		"fullscreen": false,
+		"always-on-top": false
+	}
+}

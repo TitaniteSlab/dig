@@ -1,0 +1,153 @@
+#armory {
+	position: absolute;
+	top: 130px;
+	left: calc(50% - 500px / 2);
+	width: 540px;
+	height: 450px;
+}
+
+.dialogBody {
+	text-align: center;
+}
+
+.armoryRadioSet {
+	margin-bottom: 6px;
+}
+
+#armory .itemList, #armory .itemInfo {
+	float: left;
+	display: inline-block;
+	height: 368px;
+	width: calc(50% - 8px);
+	margin: 0px 4px 0px 4px;
+	opacity: 1;
+	box-sizing: border-box;
+	text-align: left;
+}
+#armory .itemList {
+	padding: 0px 0px;
+	overflow-y: scroll;
+}
+
+.listItem {
+	margin: 4px 0px;
+	padding: 2px 2px;
+	height: 42px;
+	text-align: left;
+	border-top: 2px solid #333;
+	border-bottom: 2px solid #333;
+	background-color: #F6F6F6;
+	box-sizing: border-box;
+}
+
+#armory .listItem[data-type=item] {
+	background-image: url('../media/hud/list_item_backgrounds.png');
+	background-position: 0px 0px;
+}
+#armory .listItem[data-type=weapon] {
+	background-image: url('../media/hud/list_item_backgrounds.png');
+	background-position: 0px -42px;
+}
+#armory .listItem[data-type=mod] {
+	background-image: url('../media/hud/list_item_backgrounds.png');
+	background-position: 0px -84px;
+}
+#armory .listItem[data-type=attach] {
+	background-image: url('../media/hud/list_item_backgrounds.png');
+	background-position: 0px -126px;
+}
+
+.listItem:hover {
+	/*background-color: #6f97e9;*/
+	background-color: #CCC;
+}
+.listItem.selected {
+	/*background-color: #6f97e9;*/
+	background-color: #CCC;
+}
+
+.listItem .listItemImgWrapper {
+	position: relative;
+	display: inline-block;
+	float: left;
+	width: 20px;
+	height: 20px;
+	margin: 4px 8px 0px 2px;
+	text-align: center;
+}
+#armory .listItem[data-type=weapon] .listItemImgWrapper {
+	width: 32px;
+}
+.listItem .listItemImg {
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 16px;
+	height: 16px;
+	margin: 0px 0px;
+	
+	background-position: center center;
+}
+.listItem .listItemInfo {
+	font-size: 10pt;
+	line-height: 19px;
+}
+.listItemInfo .itemName {
+	disply: inline-block;
+	font-size: 10pt;
+	color: #EEE;
+}
+.listItemInfo .itemCost {
+	display: inline-block;
+	float: right;
+}
+
+.itemInfo {
+	position: relative;
+	background-image: url('../media/hud/item_background2.png');
+	background-repeat: no-repeat;
+	line-height: 20px;
+}
+.itemInfo .itemImgWrapper {
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 34px;
+	text-align: center;
+}
+.itemInfo[data-type=weapon] .itemImgWrapper {
+	width: 50px;
+}
+.itemInfo .itemImg {
+	display: inline-block;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.itemInfo .itemName {
+	font-size: 18pt;
+	margin-bottom: 10px;
+}
+.itemInfo .itemDesc {
+	font-size: 10pt;
+}
+.itemInfo .itemProperties {
+	
+}
+.itemInfo .itemCost {
+	position: absolute;
+}
+
+.itemInfo .itemButtons {
+	position: absolute;
+	bottom: 4px;
+	left: -4px;
+	right: -4px;
+	height: 36px;
+	text-align: center;
+}
